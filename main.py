@@ -64,6 +64,6 @@ for offer in offers_now:
 file.close()
 
 
-now = datetime.now()
-current_time = now.strftime("%H:%M:%S")
-notifySqr("good file, time: " + current_time)
+# now = datetime.now()
+# current_time = now.strftime("%H:%M:%S")
+# notifySqr("good file, time: " + current_time)
