@@ -29,7 +29,7 @@ def notifyAdik(message):
   conn.getresponse()
 
 
-link = "https://www.olx.pl/dla-dzieci/zabawki/klocki/q-lego-4195/?search%5Border%5D=created_at:desc"
+link = "https://www.olx.pl/oferty/q-lego-4195/?search%5Border%5D=created_at:desc"
 
 # read previous data from txt file
 file = open("file.txt", "r")
