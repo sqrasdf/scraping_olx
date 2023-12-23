@@ -56,8 +56,8 @@ for offer in offers:
     # comparing current and past ids
     if offer_id not in offers_past:
         print("notifying about: " + offer_name + " " + offer_id)
-        notifySqr(offer_name + "\n" + link)
-        # notifyAdik(offer_name + "\n" + link)
+        notifySqr(offer_name + "\n" + offer_link)
+        notifyAdik(offer_name + "\n" + offer_link)
 
     offers_now.append(offer_id)
 

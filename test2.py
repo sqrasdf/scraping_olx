@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-import pyperclip
 
 link = "https://www.olx.pl/oferty/q-lego-4195/?search%5Border%5D=created_at:desc"
 
@@ -22,20 +21,16 @@ for offer in offers:
     offer_link = offer.find("a").get("href")
     offer_link = "https://www.olx.pl" + offer_link
     offer_id = offer.get("id")
-    print(offer_id)
+    if offer_id not in offers_past:
+        print("new: " + offer_id)
 
 
-    offers_now.append(offer_id)
+#     offers_now.append(offer_id)
 
-print("amount of offers: " + str(len(offers)))
-print("my old offer (885743309) in current offers:", "885743309" in offers_now)
-print("my new offer (886201838) in current offers:", "886201838" in offers_now)
-print("my old offer (886202326) in current offers:", "886202326" in offers_now)
+# print("amount of offers: " + str(len(offers)))
 
-file = open("file.txt", "w")
-for offer in offers_now:
-    file.write(offer + "\n")
-file.close()
+# file = open("file.txt", "w")
+# for offer in offers_now:
+#     file.write(offer + "\n")
+# file.close()
 
-copy_str = "\n".join(offers_now)
-pyperclip.copy(copy_str)
