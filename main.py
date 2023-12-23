@@ -47,19 +47,19 @@ soup = BeautifulSoup(html_text, "lxml")
 
 offers = soup.find("div", class_='css-oukcj3').find_all("div", class_="css-1sw7q4x")
 
-# for offer in offers:
-#     offer_name = offer.find("h6", class_ = "css-16v5mdi er34gjf0").text
-#     offer_link = offer.find("a").get("href")
-#     offer_link = "https://www.olx.pl" + offer_link
-#     offer_id = offer.get("id")
+for offer in offers:
+    offer_name = offer.find("h6", class_ = "css-16v5mdi er34gjf0").text
+    offer_link = offer.find("a").get("href")
+    offer_link = "https://www.olx.pl" + offer_link
+    offer_id = offer.get("id")
 
-#     # comparing current and past ids
-#     if offer_id not in offers_past:
-#         print("notifying about: " + offer_name + " " + offer_id)
-#         notifySqr(offer_name + "\n" + link)
-#         # notifyAdik(offer_name + "\n" + link)
+    # comparing current and past ids
+    if offer_id not in offers_past:
+        print("notifying about: " + offer_name + " " + offer_id)
+        notifySqr(offer_name + "\n" + link)
+        # notifyAdik(offer_name + "\n" + link)
 
-    # offers_now.append(offer_id)
+    offers_now.append(offer_id)
 
 file = open("file.txt", "w")
 for offer in offers_now:
