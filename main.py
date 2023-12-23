@@ -37,8 +37,8 @@ file_text = file.read()
 offers_past = file_text.split("\n")
 file.close()
 
-for offer in offers_past:
-    notifySqr(offer)
+# for offer in offers_past:
+#     notifySqr(offer)
 
 # get current ids of offers
 offers_now = []
