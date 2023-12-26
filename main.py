@@ -1,35 +1,24 @@
 from bs4 import BeautifulSoup
 import requests
-
-import http.client, urllib
 from datetime import datetime
-
-api_token = "as7kmkwzoaxu7bzwdz6rjycp25rm2a"  # app token
-user_key = "u759ikjxp3m64f91oudv2gd95u4b7v"   # my token
-adik_key = "ufs46mazffpk9roie9kxhwwe81785o"   # adik's token
-
-def notifySqr(message):
-  conn = http.client.HTTPSConnection("api.pushover.net:443")
-  conn.request("POST", "/1/messages.json",
-    urllib.parse.urlencode({
-      "token": api_token,
-      "user": user_key,
-      "message": message,
-    }), { "Content-type": "application/x-www-form-urlencoded" })
-  conn.getresponse()
-
-def notifyAdik(message):
-  conn = http.client.HTTPSConnection("api.pushover.net:443")
-  conn.request("POST", "/1/messages.json",
-    urllib.parse.urlencode({
-      "token": api_token,
-      "user": adik_key,
-      "message": message,
-    }), { "Content-type": "application/x-www-form-urlencoded" })
-  conn.getresponse()
-
+import telegram
+import asyncio
+import os 
+from dotenv import load_dotenv
 
 link = "https://www.olx.pl/oferty/q-lego-4195/?search%5Border%5D=created_at:desc"
+
+# get hidden values
+load_dotenv()
+TOKEN = os.environ.get("TOKEN")
+sqr_id = os.environ.get("sqr_id")
+group_id = os.environ.get("group_id")
+
+async def sendNotification(message):
+    bot = telegram.Bot(token=TOKEN)
+    task_message = asyncio.create_task(bot.send_message(chat_id=group_id, text=message))
+    res_message = await task_message
+
 
 # read previous data from txt file
 file = open("file.txt", "r")
@@ -37,14 +26,10 @@ file_text = file.read()
 offers_past = file_text.split("\n")
 file.close()
 
-# for offer in offers_past:
-#     notifySqr(offer)
-
 # get current ids of offers
 offers_now = []
 html_text = requests.get(link).text
 soup = BeautifulSoup(html_text, "lxml")
-
 offers = soup.find("div", class_='css-oukcj3').find_all("div", class_="css-1sw7q4x")
 
 for offer in offers:
@@ -56,8 +41,7 @@ for offer in offers:
     # comparing current and past ids
     if offer_id not in offers_past:
         print("notifying about: " + offer_name + " " + offer_id)
-        notifySqr(offer_name + "\n" + offer_link)
-        notifyAdik(offer_name + "\n" + offer_link)
+        asyncio.run(sendNotification(offer_name + "\n" + offer_link))
 
     offers_now.append(offer_id)
 
@@ -69,4 +53,4 @@ file.close()
 
 # now = datetime.now()
 # current_time = now.strftime("%H:%M:%S")
-# notifySqr("good file, time: " + current_time)
+# asyncio.run(sendNotification("good file, time: " + current_time))
