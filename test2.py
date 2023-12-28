@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 
-link = "https://www.olx.pl/oferty/q-lego-4195/?search%5Border%5D=created_at:desc"
+# link = "https://www.olx.pl/oferty/q-lego-4195/?search%5Border%5D=created_at:desc"
+link = "https://www.olx.pl/oferty/q-lego-42138/?search%5Border%5D=created_at:desc"
 
 # read previous data from txt file
 file = open("file.txt", "r")

@@ -8,9 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
-
-
       - name: checkout repo content
         uses: actions/checkout@v4 # checkout the repository content to github runner
 
