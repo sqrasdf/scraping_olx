@@ -9,7 +9,9 @@ from dotenv import load_dotenv
 # link = "https://www.olx.pl/oferty/q-lego-4195/?search%5Border%5D=created_at:desc"
 
 link_list = [
-    "https://www.olx.pl/oferty/q-lego-4195/?search%5Border%5D=created_at:desc"
+    "https://www.olx.pl/oferty/q-lego-4195/?search%5Border%5D=created_at:desc",
+    "https://www.olx.pl/oferty/q-Lego-Piraci-z-Karaibów/?search%5Border%5D=created_at:desc",
+    "https://www.olx.pl/oferty/q-Lego-Pirates-of-the-Caribbean/?search%5Border%5D=created_at:desc"
 ]
 
 # get hidden values
