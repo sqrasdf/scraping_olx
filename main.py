@@ -14,6 +14,11 @@ link_list = [
     "https://www.olx.pl/oferty/q-Lego-Pirates-of-the-Caribbean/?search%5Border%5D=created_at:desc"
 ]
 
+ban_words = [ 
+    "lepin",
+    "jak lego"
+]
+
 # get hidden values
 load_dotenv()
 TOKEN = os.environ.get("TOKEN")
@@ -42,6 +47,11 @@ for link in link_list:
 
     for offer in offers:
         offer_name = offer.find("h6", class_ = "css-16v5mdi er34gjf0").text
+        # bad words
+        if "jak lego" in offer_name.lower():
+            continue
+        if "lepin" in offer_name.lower():
+            continue     
         offer_link = offer.find("a").get("href")
         offer_link = "https://www.olx.pl" + offer_link
         offer_id = offer.get("id")
