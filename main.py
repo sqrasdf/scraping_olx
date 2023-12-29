@@ -14,9 +14,12 @@ link_list = [
     "https://www.olx.pl/oferty/q-Lego-Pirates-of-the-Caribbean/?search%5Border%5D=created_at:desc"
 ]
 
-ban_words = [ 
+bad_words = [
+    "gry",
+    "gra",
+    "jak lego",
     "lepin",
-    "jak lego"
+    "xbox"
 ]
 
 # get hidden values
@@ -47,21 +50,27 @@ for link in link_list:
 
     for offer in offers:
         offer_name = offer.find("h6", class_ = "css-16v5mdi er34gjf0").text
-        # bad words
-        if "jak lego" in offer_name.lower():
-            continue
-        if "lepin" in offer_name.lower():
-            continue     
-        offer_link = offer.find("a").get("href")
-        offer_link = "https://www.olx.pl" + offer_link
-        offer_id = offer.get("id")
 
-        # comparing current and past ids
-        if offer_id not in offers_past:
-            print("notifying about: " + offer_name + " " + offer_id)
-            asyncio.run(sendNotification(offer_name + "\n" + offer_link))
 
-        offers_now.append(offer_id)
+        # checking if title has no bad words
+        if not any(bad_word in offer_name.lower() for bad_word in bad_words): 
+
+            # bad words
+            # if "jak lego" in offer_name.lower():
+            #     continue
+            # if "lepin" in offer_name.lower():
+            #     continue    
+            
+            offer_link = offer.find("a").get("href")
+            offer_link = "https://www.olx.pl" + offer_link
+            offer_id = offer.get("id")
+
+            # comparing current and past ids
+            if offer_id not in offers_past:
+                print("notifying about: " + offer_name + " " + offer_id)
+                asyncio.run(sendNotification(offer_name + "\n" + offer_link))
+
+            offers_now.append(offer_id)
 
 file = open("file.txt", "w")
 for offer in offers_now:
