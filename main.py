@@ -17,9 +17,13 @@ link_list = [
 bad_words = [
     "gry",
     "gra",
+    "gier",
     "jak lego",
     "lepin",
-    "xbox"
+    "xbox",
+    "psp",
+    "playstation",
+    "play station"
 ]
 
 # get hidden values
