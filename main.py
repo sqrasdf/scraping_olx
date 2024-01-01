@@ -23,7 +23,9 @@ bad_words = [
     "xbox",
     "psp",
     "playstation",
-    "play station"
+    "play station",
+    "ps3",
+    "ps4"
 ]
 
 # get hidden values
@@ -57,13 +59,7 @@ for link in link_list:
 
 
         # checking if title has no bad words
-        if not any(bad_word in offer_name.lower() for bad_word in bad_words): 
-
-            # bad words
-            # if "jak lego" in offer_name.lower():
-            #     continue
-            # if "lepin" in offer_name.lower():
-            #     continue    
+        if not any(bad_word in offer_name.lower() for bad_word in bad_words):    
             
             offer_link = offer.find("a").get("href")
             offer_link = "https://www.olx.pl" + offer_link
