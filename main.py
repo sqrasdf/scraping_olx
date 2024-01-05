@@ -26,6 +26,8 @@ bad_words = [
     "play station",
     "ps3",
     "ps4"
+    "pc",
+    "kompatybiln", # without last letter 
 ]
 
 # get hidden values
